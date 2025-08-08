@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Thuba & Jide Wedding</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Great+Vibes&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+			rel="stylesheet" />
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+			rel="stylesheet" />
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+			rel="stylesheet" />
+		<style>
+			body {
+				/* background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); */
+				background: #ecece7;
+				font-family: "Lora", serif;
+				font-optical-sizing: auto;
+				font-style: italic;
+				min-height: 100vh;
+			}
+			h1,
+			h2 {
+				font-family: "Great Vibes", cursive;
+				font-weight: 400;
+				font-style: normal;
+			}
+
+			.nav-card {
+				max-width: 900px;
+				margin: 2rem auto;
+			}
+
+			.navbar {
+				padding: 0;
+			}
+
+			.navbar-brand {
+				font-size: 1.8rem;
+				font-weight: 300;
+				color: #073533 !important;
+			}
+
+			.nav-link {
+				font-size: 1.1rem;
+				padding: 0.75rem 1.5rem !important;
+				border-radius: 25px;
+				transition: all 0.3s ease;
+				color: #6c757d !important;
+				margin: 0 0.25rem;
+			}
+
+			.nav-link:hover {
+				background: rgba(4, 31, 29, 0.1);
+				color: #073533 !important;
+			}
+
+			.nav-link.active {
+				background: #073533 !important;
+				color: white !important;
+			}
+
+			.hero-section {
+				background: linear-gradient(
+						rgba(0, 0, 0, 0.4),
+						rgba(0, 0, 0, 0.4)
+					),
+					url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="roses" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="%23073533"/><rect width="100" height="100" fill="url(%23roses)"/></svg>');
+				background-size: cover;
+				color: white;
+				padding: 2rem 0 1rem;
+				text-align: center;
+				margin-bottom: 2rem;
+			}
+
+			.hero-section h1 {
+				font-size: 3rem;
+				font-weight: 300;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+				margin-bottom: 0.5rem;
+			}
+
+			.hero-section .date {
+				font-size: 1.2rem;
+				opacity: 0.9;
+				font-style: italic;
+			}
+
+			.page-container {
+				min-height: calc(100vh - 200px);
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+
+			.section-card {
+				background: white;
+				border-radius: 20px;
+				box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+				padding: 3rem;
+				margin: 2rem auto;
+				border: none;
+				max-width: 900px;
+				transition: transform 0.3s ease;
+			}
+
+			.section-card:hover {
+				transform: translateY(-5px);
+			}
+
+			.section-title {
+				color: #073533;
+				font-size: 2.5rem;
+				margin-bottom: 2rem;
+				text-align: center;
+				position: relative;
+			}
+
+			.section-title::after {
+				content: "";
+				display: none;
+				width: 100px;
+				height: 4px;
+				background: linear-gradient(
+					to right,
+					rgb(255, 177, 67),
+					rgb(89, 63, 35),
+					rgb(255, 177, 67)
+				);
+
+				margin: 1rem auto;
+			}
+
+			.event-item {
+				border-left: 4px solid #073533;
+				padding-left: 2rem;
+				margin-bottom: 2rem;
+				position: relative;
+				transition: all 0.3s ease;
+			}
+
+			.event-item:hover {
+				transform: translateX(10px);
+			}
+
+			.event-item::before {
+				content: "";
+				position: absolute;
+				left: -10px;
+				top: 0;
+				width: 16px;
+				height: 16px;
+				background: #073533;
+				border-radius: 50%;
+				border: 4px solid white;
+				box-shadow: 0 0 0 3px #073533;
+			}
+
+			.event-time {
+				font-family: "Abril Fatface", serif;
+				font-weight: 400;
+				font-style: normal;
+				color: #073533;
+				font-size: 1.3rem;
+				display: flex;
+				align-items: center;
+				margin-bottom: 0.5rem;
+			}
+
+			.event-title {
+				font-family: "Abril Fatface", serif;
+				font-weight: 400;
+				font-style: normal;
+				font-size: 1.4rem;
+				margin: 0.5rem 0;
+				color: #495057;
+				font-weight: 600;
+			}
+
+			.event-description {
+				color: #6c757d;
+				font-size: 1rem;
+				line-height: 1.6;
+			}
+
+			.search-box {
+				position: relative;
+				margin-bottom: 2rem;
+				max-width: 500px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			.search-box input {
+				border-radius: 30px;
+				padding: 1rem 4rem 1rem 2rem;
+				border: 2px solid #e9ecef;
+				font-size: 1.1rem;
+				transition: all 0.3s ease;
+				width: 100%;
+			}
+
+			.search-box input:focus {
+				border-color: #073533;
+				box-shadow: 0 0 0 0.25rem rgba(4, 31, 29, 0.25);
+			}
+
+			.search-box i {
+				position: absolute;
+				right: 2rem;
+				top: 50%;
+				transform: translateY(-50%);
+				color: #6c757d;
+				font-size: 1.2rem;
+			}
+
+			.table-card {
+				background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+				border: 2px solid #e9ecef;
+				border-radius: 20px;
+				padding: 2rem;
+				margin-bottom: 1.5rem;
+				transition: all 0.3s ease;
+				cursor: pointer;
+			}
+
+			.table-card:hover,
+			.table-card.highlight {
+				border-color: #073533;
+				transform: scale(1.03);
+				box-shadow: 0 15px 35px rgba(4, 31, 29, 0.15);
+			}
+
+			.table-number {
+				font-size: 1.8rem;
+				font-weight: bold;
+				color: #073533;
+				margin-bottom: 1rem;
+				text-align: center;
+				font-family: "Abril Fatface", serif;
+				font-weight: 400;
+				font-style: normal;
+			}
+
+			.guest-name {
+				background: #f8f9fa;
+				padding: 0.5rem 1rem;
+				margin: 0.3rem;
+				border-radius: 20px;
+				display: inline-block;
+				font-size: 0.95rem;
+				border: 1px solid #dee2e6;
+				transition: all 0.3s ease;
+			}
+
+			.guest-name.highlight {
+				background: #073533;
+				color: white;
+				border-color: #073533;
+				animation: pulse 1.5s infinite;
+				transform: scale(1.05);
+			}
+
+			@keyframes pulse {
+				0% {
+					box-shadow: 0 0 0 0 rgba(4, 31, 29, 0.7);
+				}
+				70% {
+					box-shadow: 0 0 0 10px rgba(4, 31, 29, 0);
+				}
+				100% {
+					box-shadow: 0 0 0 0 rgba(4, 31, 29, 0);
+				}
+			}
+
+			.no-results {
+				text-align: center;
+				color: #6c757d;
+				font-style: italic;
+				padding: 3rem;
+				font-size: 1.1rem;
+			}
+
+			.welcome-message {
+				text-align: center;
+				color: #6c757d;
+				font-size: 1.1rem;
+				margin-bottom: 2rem;
+			}
+
+			@media (max-width: 768px) {
+				.hero-section h1 {
+					font-size: 2.2rem;
+				}
+				.section-card {
+					padding: 2rem;
+					margin: 1rem;
+				}
+				.section-title {
+					font-size: 2rem;
+				}
+				.event-item {
+					padding-left: 1.5rem;
+				}
+				.table-card {
+					padding: 1.5rem;
+				}
+			}
+
+			.fade-in {
+				animation: fadeIn 0.6s ease-in;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(30px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.page-hidden {
+				display: none;
+			}
+
+			.footer-info {
+				background: white;
+				border-radius: 15px;
+				padding: 2rem;
+				margin-top: 2rem;
+				text-align: center;
+				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="root"></div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+		<script type="text/babel">
+			const { useState, useEffect } = React;
+
+			// Sample data - customize this for your wedding
+			const weddingEvents = [
+				{
+					time: "3:00 PM",
+					title: "Ceremony Begins",
+					description:
+						"Please be seated by 2:45 PM. The ceremony will take place in the Rose Garden with beautiful views of the countryside.",
+					icon: "fas fa-heart",
+				},
+				{
+					time: "3:30 PM",
+					title: "Cocktail Hour",
+					description:
+						"Join us for drinks and hors d'oeuvres on the Terrace while we take photos with family and the wedding party.",
+					icon: "fas fa-glass-cheers",
+				},
+				{
+					time: "5:00 PM",
+					title: "Reception Dinner",
+					description:
+						"Dinner will be served in the Main Ballroom. Please find your assigned table and enjoy a three-course meal.",
+					icon: "fas fa-utensils",
+				},
+				{
+					time: "7:00 PM",
+					title: "First Dance & Toasts",
+					description:
+						"The newlyweds will share their first dance, followed by parent dances and heartfelt speeches.",
+					icon: "fas fa-music",
+				},
+				{
+					time: "7:30 PM",
+					title: "Dancing & Celebration",
+					description:
+						"Let's party! The dance floor is open and the bar will remain open until 11 PM. DJ will be playing your favorite hits!",
+					icon: "fas fa-dancing",
+				},
+			];
+
+			const seatingChart = [
+				{
+					table: "Emerald Promise",
+					guests: [
+						"Nafisa Shoge",
+						"Kezia Ayeni",
+						"Dayo Saka",
+						"Tink ",
+						"Joel Ayeni",
+						"Joshua",
+						"Sean Shoge",
+						"Keziah Barrett",
+						"Nomzamo Ncube",
+						"Muzi Ncube",
+						"Ndumiso",
+					],
+				},
+				{
+					table: "Whispering Sage",
+					guests: [
+						"Yinka Shoge",
+						"Yomi Saka",
+						"Nike Shoge",
+						"Sarah Shoge",
+						"Tinuade Kassim",
+						"Folasade Adeyemi",
+						"Lekan Adeyemi",
+						"Onome Adeyemi",
+						"Lukman Shoge",
+						"Fola Shoge",
+					],
+				},
+				{
+					table: "Jade Harmony",
+					guests: [
+						"Virginia",
+						"Ezweni",
+						"Michelle Ndlovu",
+						"Thebe",
+						"Sazi Ncube",
+						"Malcom",
+						"Soneni",
+						"Pro",
+						"Hloniphani",
+						"Jabulani",
+						"Bongani",
+					],
+				},
+				{
+					table: "Minted Memories",
+					guests: [
+						"Sabrina Kirby",
+						"Tracy Clarke",
+						"William Rodil",
+						"Idris Ademola",
+						"Stella",
+						"Lade Ajumobi",
+						"Afolabi Ajumobi",
+						"Linda Mlambo",
+						"Alfred Mlambo",
+					],
+				},
+				{
+					table: "Hidden Hollow ",
+					guests: [
+						"Leon Neatherway",
+						"Omari Shoge",
+						"Micah Benson",
+						"Priye Benson",
+						"Tonye Benson",
+						"Rory Mlambo",
+						"Shaune Mlambo",
+						"Emmanuel Mlambo",
+						"Ayanda",
+						"Thabiso",
+						"Theo Paterson",
+					],
+				},
+				{
+					table: "Olive Grove Dreams",
+					guests: [
+						"Thobani Ndlovu",
+						"Nobuhle Ndlovu",
+						"Lisa Ndlovu",
+						"Samantha Moyo",
+						"Mandla Moyo",
+						"Lovemore Wabayi",
+						"Simanga Wabayi",
+						"Nokukhanya Mpondo",
+						"Collece Ncube",
+						"Samu Ncube",
+					],
+				},
+				{
+					table: "Velvet Moss",
+					guests: [
+						"Yinka Osungbesan",
+						"Tomi Ojo",
+						"Jumoke Harrison",
+						"Marian Olusanya ",
+						"Funke Oyedeji ",
+						"Olabisi Solomon",
+						"Siza Mazula",
+						"Jonathan Doel",
+					],
+				},
+				{
+					table: "Lime light love",
+					guests: [
+						"Sandisiwe O",
+						"Olatunbosun O",
+						"Sibangani ",
+						"Tholakele",
+						"Simiso Kaseke",
+						"Dennis Kaseke",
+						"Mujidat Soetan",
+						"Folusho Ilori",
+						"Esnath Ndiweni",
+						"Rodrick Ndiweni",
+					],
+				},
+				{
+					table: "Forest Serenade",
+					guests: [
+						"Rhys Kuponiyi",
+						"Leye Saka",
+						"Melyn",
+						"Princess",
+						"Jeyson",
+						"Donald",
+						"Dumo",
+						"Zamo",
+						"Isiah Barrett",
+						"Helen Aladenike",
+						"Karen",
+						"Khanya Ncube",
+					],
+				},
+				{
+					table: "",
+					guests: [],
+				},
+			];
+
+			function WeddingPage() {
+				const [currentPage, setCurrentPage] = useState("events");
+				const [searchTerm, setSearchTerm] = useState("");
+				const [highlightedTable, setHighlightedTable] = useState(null);
+				const [highlightedGuest, setHighlightedGuest] = useState("");
+
+				const handleSearch = (term) => {
+					setSearchTerm(term);
+
+					if (term.length < 2) {
+						setHighlightedTable(null);
+						setHighlightedGuest("");
+						return;
+					}
+
+					// Find matching guest and table
+					for (let table of seatingChart) {
+						const matchingGuest = table.guests.find((guest) =>
+							guest.toLowerCase().includes(term.toLowerCase())
+						);
+
+						if (matchingGuest) {
+							setHighlightedTable(table.table);
+							setHighlightedGuest(matchingGuest);
+							return;
+						}
+					}
+
+					setHighlightedTable(null);
+					setHighlightedGuest("");
+				};
+
+				const filteredTables =
+					searchTerm.length >= 2 && highlightedTable
+						? seatingChart.filter(
+								(table) => table.table === highlightedTable
+						  )
+						: seatingChart;
+
+				const renderEventsPage = () => (
+					<div className="page-container fade-in">
+						<div className="container">
+							<div className="section-card">
+								<h2 className="section-title">
+									Order of Events
+								</h2>
+								<div className="welcome-message">
+									<p>
+										Here's what we have planned for our
+										special day. We can't wait to celebrate
+										with you!
+									</p>
+								</div>
+								<div className="timeline">
+									{weddingEvents.map((event, index) => (
+										<div key={index} className="event-item">
+											<div className="event-time">
+												<i
+													className={`${event.icon} me-3`}></i>
+												{event.time}
+											</div>
+											<div className="event-title">
+												{event.title}
+											</div>
+											<div className="event-description">
+												{event.description}
+											</div>
+										</div>
+									))}
+								</div>
+							</div>
+
+							<div className="footer-info">
+								<p className="mb-2">
+									<i
+										className="fas fa-info-circle me-2"
+										style={{ color: "#073533" }}></i>
+									<strong>
+										Need directions or have questions?
+									</strong>
+								</p>
+								<p
+									className="mb-0"
+									style={{ color: "#6c757d" }}>
+									Contact our Wedding Coordinator:{" "}
+									<strong>(555) 123-4567</strong>
+								</p>
+							</div>
+						</div>
+					</div>
+				);
+
+				const renderSeatingPage = () => (
+					<div className="page-container fade-in">
+						<div className="container">
+							<div className="section-card">
+								<h2 className="section-title">
+									Find Your Seat
+								</h2>
+
+								<div className="welcome-message">
+									<p>
+										Enter your name below to quickly locate
+										your assigned table for dinner.
+									</p>
+								</div>
+
+								<div className="search-box">
+									<input
+										type="text"
+										className="form-control"
+										placeholder="Enter your name to find your table..."
+										value={searchTerm}
+										onChange={(e) =>
+											handleSearch(e.target.value)
+										}
+									/>
+									<i className="fas fa-search"></i>
+								</div>
+
+								{searchTerm.length >= 2 &&
+									!highlightedTable && (
+										<div className="no-results">
+											<i className="fas fa-exclamation-circle me-2"></i>
+											No guest found with that name.
+											Please try a different spelling or
+											check with the hosts.
+										</div>
+									)}
+
+								<div className="row">
+									{filteredTables.map((table) => (
+										<div
+											key={table.table}
+											className="col-lg-6 col-md-6 mb-3">
+											<div
+												className={`table-card ${
+													highlightedTable ===
+													table.table
+														? "highlight"
+														: ""
+												}`}>
+												<div className="table-number">
+													{table.table}
+												</div>
+												<div className="guests text-center">
+													{table.guests.map(
+														(guest, idx) => (
+															<span
+																key={idx}
+																className={`guest-name ${
+																	highlightedGuest ===
+																	guest
+																		? "highlight"
+																		: ""
+																}`}>
+																{guest}
+															</span>
+														)
+													)}
+												</div>
+											</div>
+										</div>
+									))}
+								</div>
+
+								{searchTerm.length < 2 && (
+									<div className="text-center mt-4">
+										<small
+											className="text-muted"
+											style={{ fontSize: "1rem" }}>
+											<i className="fas fa-info-circle me-2"></i>
+											Type at least 2 characters to search
+											for your name
+										</small>
+									</div>
+								)}
+							</div>
+
+							<div className="footer-info">
+								<p className="mb-2">
+									<i
+										className="fas fa-utensils me-2"
+										style={{ color: "#073533" }}></i>
+									<strong>
+										Dinner will be served at 5:00 PM
+									</strong>
+								</p>
+								<p
+									className="mb-0"
+									style={{ color: "#6c757d" }}>
+									Please let us know about any dietary
+									restrictions or allergies
+								</p>
+							</div>
+						</div>
+					</div>
+				);
+
+				return (
+					<div>
+						{/* Hero Section */}
+						<div className="hero-section">
+							<div className="container">
+								<h1 className="fade-in">Thuba & Jide</h1>
+								<p className="date fade-in">
+									Saturday, December 16th, 2024
+								</p>
+								<p
+									className="fade-in"
+									style={{
+										fontSize: "1.1rem",
+										marginTop: "1rem",
+									}}>
+									<i className="fas fa-map-marker-alt me-2"></i>
+									The Grand Ballroom, Downtown Hotel
+								</p>
+							</div>
+							{/* Navigation */}
+							<div className="container">
+								<div className="nav-card">
+									<nav className="navbar navbar-expand-lg navbar-light w-100">
+										<div className="navbar-nav w-100 d-flex justify-content-around">
+											<button
+												className={`nav-link btn btn-link w-100 ${
+													currentPage === "events"
+														? "active"
+														: ""
+												}`}
+												onClick={() =>
+													setCurrentPage("events")
+												}>
+												<i className="fas fa-calendar-alt me-2"></i>
+												Schedule
+											</button>
+											<button
+												className={`nav-link btn btn-link w-100 ${
+													currentPage === "seating"
+														? "active"
+														: ""
+												}`}
+												onClick={() =>
+													setCurrentPage("seating")
+												}>
+												<i className="fas fa-table me-2"></i>
+												Seating
+											</button>
+										</div>
+									</nav>
+								</div>
+							</div>
+						</div>
+
+						{/* Page Content */}
+						{currentPage === "events" && renderEventsPage()}
+						{currentPage === "seating" && renderSeatingPage()}
+					</div>
+				);
+			}
+
+			ReactDOM.render(<WeddingPage />, document.getElementById("root"));
+		</script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.22.5/babel.min.js"></script>
+	</body>
+</html>
