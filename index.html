@@ -16,6 +16,27 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 			rel="stylesheet" />
 		<style>
+			.shimmer-text {
+				background: linear-gradient(
+					rgb(255, 177, 67),
+					rgb(89, 63, 35),
+					rgb(255, 177, 67)
+				);
+				background-size: 100% 400%;
+				background-clip: text;
+				-webkit-background-clip: text;
+				color: transparent;
+				animation: shimmer 3s linear infinite;
+			}
+
+			@keyframes shimmer {
+				0% {
+					background-position: 0% 0%;
+				}
+				100% {
+					background-position: 0% 400%;
+				}
+			}
 			body {
 				/* background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); */
 				background: #ecece7;
@@ -339,6 +360,42 @@
 				text-align: center;
 				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 			}
+			.hall {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 15px;
+				padding: 20px;
+				background-color: #ecece7;
+				border-radius: 10px;
+				margin: 20px 0;
+			}
+
+			.table {
+				background-color: #fff;
+				border: 2px solid #dee2e6;
+				border-radius: 50%;
+				padding: 20px 10px;
+				text-align: center;
+				font-weight: 500;
+				font-size: 0.9rem;
+				transition: all 0.3s ease;
+				min-height: 80px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.table.selected {
+				background-color: #667eea;
+				color: white;
+				border-color: #667eea;
+				box-shadow: 0 4px 15px rgba(103, 126, 234, 0.4);
+				transform: scale(1.05);
+			}
+
+			.modal-backdrop.show {
+				opacity: 0.5;
+			}
 		</style>
 	</head>
 	<body>
@@ -354,39 +411,60 @@
 			// Sample data - customize this for your wedding
 			const weddingEvents = [
 				{
-					time: "3:00 PM",
-					title: "Ceremony Begins",
+					time: "1:00 PM",
+					title: "Let’s Get Married!",
 					description:
-						"Please be seated by 2:45 PM. The ceremony will take place in the Rose Garden with beautiful views of the countryside.",
+						"Please be seated by 12:45 PM. The ceremony will take place in the Rose Garden with beautiful views of the countryside.",
 					icon: "fas fa-heart",
 				},
 				{
-					time: "3:30 PM",
-					title: "Cocktail Hour",
+					time: "1:30 PM",
+					title: "Sip, Chat & Cheers – Cocktail Hour ",
 					description:
-						"Join us for drinks and hors d'oeuvres on the Terrace while we take photos with family and the wedding party.",
+						"Join us for drinks and canapes while we take photos with family and the wedding party.",
 					icon: "fas fa-glass-cheers",
 				},
 				{
-					time: "5:00 PM",
-					title: "Reception Dinner",
+					time: "2:40 PM",
+					title: "Grand Entrance into the Orangery",
 					description:
-						"Dinner will be served in the Main Ballroom. Please find your assigned table and enjoy a three-course meal.",
+						"Step into elegance! Make a stunning entrance as you arrive in the beautiful Orangery - let the celebration begin in style!",
+					icon: "fa-solid fa-archway",
+				},
+				{
+					time: "5:00 PM",
+					title: "Feast Time – Wedding Breakfast",
+					description:
+						"Dinner will be served in the Orangery. Please find your assigned table and enjoy a three-course meal.",
 					icon: "fas fa-utensils",
 				},
 				{
 					time: "7:00 PM",
-					title: "First Dance & Toasts",
+					title: "Our First Dance",
 					description:
-						"The newlyweds will share their first dance, followed by parent dances and heartfelt speeches.",
+						"Join the newlyweds as they share their magical first dance together.",
 					icon: "fas fa-music",
 				},
 				{
-					time: "7:30 PM",
+					time: "7:45 PM",
 					title: "Dancing & Celebration",
 					description:
 						"Let's party! The dance floor is open and the bar will remain open until 11 PM. DJ will be playing your favorite hits!",
-					icon: "fas fa-dancing",
+					icon: "fa-solid fa-icons",
+				},
+				{
+					time: "9:40 PM",
+					title: "Light Up the Night! - Sparkler line",
+					description:
+						"Grab a sparkler and join the magical send-off! Let’s light up the night with smiles and sparkles as we celebrate together!",
+					icon: "fa-solid fa-wand-sparkles",
+				},
+				{
+					time: "11:45 PM",
+					title: "Hugs & Goodbyes – Guests Depart",
+					description:
+						"Time to say our goodbyes! Thanks for making today unforgettable. Safe travels and big hugs until we meet again!",
+					icon: "fa-solid fa-door-open",
 				},
 			];
 
@@ -453,7 +531,7 @@
 					],
 				},
 				{
-					table: "Hidden Hollow ",
+					table: "Hidden Hollow",
 					guests: [
 						"Leon Neatherway",
 						"Omari Shoge",
@@ -528,10 +606,6 @@
 						"Khanya Ncube",
 					],
 				},
-				{
-					table: "",
-					guests: [],
-				},
 			];
 
 			function WeddingPage() {
@@ -539,6 +613,9 @@
 				const [searchTerm, setSearchTerm] = useState("");
 				const [highlightedTables, setHighlightedTables] = useState([]);
 				const [highlightedGuests, setHighlightedGuests] = useState([]);
+				const [showModal, setShowModal] = useState(false);
+				const [selectedTable, setSelectedTable] = useState("");
+				const [selectedGuest, setSelectedGuest] = useState("");
 
 				const handleSearch = (term) => {
 					setSearchTerm(term);
@@ -654,7 +731,23 @@
 									/>
 									<i className="fas fa-search"></i>
 								</div>
-
+								{searchTerm.length >= 2 &&
+									highlightedTables.length > 0 && (
+										<div className="row">
+											<div className="search-results-count mb-5">
+												Found{" "}
+												<span>
+													{highlightedTables.length}{" "}
+												</span>
+												table
+												{highlightedTables.length !== 1
+													? "s"
+													: ""}{" "}
+												with guests matching "
+												{searchTerm}"
+											</div>
+										</div>
+									)}
 								{searchTerm.length >= 2 &&
 									highlightedTables.length === 0 && (
 										<div className="no-results">
@@ -678,7 +771,18 @@
 														? "highlight"
 														: ""
 												}`}>
-												<div className="table-number">
+												<div
+													className="table-number"
+													style={{
+														cursor: "pointer",
+													}}
+													onClick={() => {
+														setSelectedTable(
+															table.table
+														);
+														setSelectedGuest("");
+														setShowModal(true);
+													}}>
 													{table.table}
 												</div>
 												<div className="guests text-center">
@@ -692,7 +796,21 @@
 																	)
 																		? "highlight"
 																		: ""
-																}`}>
+																}`}
+																style={{
+																	cursor: "pointer",
+																}}
+																onClick={() => {
+																	setSelectedTable(
+																		table.table
+																	);
+																	setSelectedGuest(
+																		guest
+																	);
+																	setShowModal(
+																		true
+																	);
+																}}>
 																{guest}
 															</span>
 														)
@@ -743,7 +861,7 @@
 							<div className="container">
 								<h1 className="fade-in">Thuba & Jide</h1>
 								<p className="date fade-in">
-									Saturday, December 16th, 2024
+									Wednesday, October 1st, 2025
 								</p>
 								<p
 									className="fade-in"
@@ -752,7 +870,7 @@
 										marginTop: "1rem",
 									}}>
 									<i className="fas fa-map-marker-alt me-2"></i>
-									The Grand Ballroom, Downtown Hotel
+									High House Weddings
 								</p>
 							</div>
 							{/* Navigation */}
@@ -769,7 +887,7 @@
 												onClick={() =>
 													setCurrentPage("events")
 												}>
-												<i className="fas fa-calendar-alt me-2"></i>
+												<i className="fa-solid fa-clipboard-list me-2"></i>
 												Schedule
 											</button>
 											<button
@@ -781,7 +899,7 @@
 												onClick={() =>
 													setCurrentPage("seating")
 												}>
-												<i className="fas fa-table me-2"></i>
+												<i className="fa-solid fa-chair me-2"></i>
 												Seating
 											</button>
 										</div>
@@ -793,6 +911,80 @@
 						{/* Page Content */}
 						{currentPage === "events" && renderEventsPage()}
 						{currentPage === "seating" && renderSeatingPage()}
+						{/* Modal */}
+						{showModal && (
+							<div
+								className="modal fade show"
+								style={{ display: "block" }}
+								tabIndex="-1">
+								<div className="modal-dialog modal-lg">
+									<div className="modal-content">
+										<div className="modal-header">
+											<h5 className="modal-title">
+												{selectedGuest
+													? `Welcome ${selectedGuest}!`
+													: `Table: ${selectedTable}`}
+											</h5>
+											<button
+												type="button"
+												className="btn-close"
+												onClick={() =>
+													setShowModal(false)
+												}></button>
+										</div>
+										<div className="modal-body">
+											{selectedGuest && (
+												<div className="welcome-message mb-3">
+													<p className="lead text-center">
+														We're so excited you're
+														here! You're seated at{" "}
+														<strong>
+															{selectedTable}
+														</strong>
+														.
+													</p>
+												</div>
+											)}
+
+											<div className="hall">
+												{seatingChart
+													.filter(
+														(table) => table.table
+													)
+													.map((table) => (
+														<div
+															key={table.table}
+															className={`table ${
+																selectedTable ===
+																table.table
+																	? "selected"
+																	: ""
+															}`}
+															data-name={
+																table.table
+															}>
+															{table.table}
+														</div>
+													))}
+											</div>
+										</div>
+										<div className="modal-footer">
+											<button
+												type="button"
+												className="btn btn-secondary"
+												onClick={() =>
+													setShowModal(false)
+												}>
+												Close
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						)}
+						{showModal && (
+							<div className="modal-backdrop fade show"></div>
+						)}
 					</div>
 				);
 			}
