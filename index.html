@@ -537,39 +537,40 @@
 			function WeddingPage() {
 				const [currentPage, setCurrentPage] = useState("events");
 				const [searchTerm, setSearchTerm] = useState("");
-				const [highlightedTable, setHighlightedTable] = useState(null);
-				const [highlightedGuest, setHighlightedGuest] = useState("");
+				const [highlightedTables, setHighlightedTables] = useState([]);
+				const [highlightedGuests, setHighlightedGuests] = useState([]);
 
 				const handleSearch = (term) => {
 					setSearchTerm(term);
 
 					if (term.length < 2) {
-						setHighlightedTable(null);
-						setHighlightedGuest("");
+						setHighlightedTables([]);
+						setHighlightedGuests([]);
 						return;
 					}
 
-					// Find matching guest and table
-					for (let table of seatingChart) {
+					// Find ALL matching guests and tables
+					const matchingTables = [];
+					const matchingGuests = [];
+
+					seatingChart.forEach((table) => {
 						const matchingGuest = table.guests.find((guest) =>
 							guest.toLowerCase().includes(term.toLowerCase())
 						);
 
 						if (matchingGuest) {
-							setHighlightedTable(table.table);
-							setHighlightedGuest(matchingGuest);
-							return;
+							matchingTables.push(table.table);
+							matchingGuests.push(matchingGuest);
 						}
-					}
+					});
 
-					setHighlightedTable(null);
-					setHighlightedGuest("");
+					setHighlightedTables(matchingTables);
+					setHighlightedGuests(matchingGuests);
 				};
-
 				const filteredTables =
-					searchTerm.length >= 2 && highlightedTable
-						? seatingChart.filter(
-								(table) => table.table === highlightedTable
+					searchTerm.length >= 2 && highlightedTables.length > 0
+						? seatingChart.filter((table) =>
+								highlightedTables.includes(table.table)
 						  )
 						: seatingChart;
 
@@ -655,7 +656,7 @@
 								</div>
 
 								{searchTerm.length >= 2 &&
-									!highlightedTable && (
+									highlightedTables.length === 0 && (
 										<div className="no-results">
 											<i className="fas fa-exclamation-circle me-2"></i>
 											No guest found with that name.
@@ -671,8 +672,9 @@
 											className="col-lg-6 col-md-6 mb-3">
 											<div
 												className={`table-card ${
-													highlightedTable ===
-													table.table
+													highlightedTables.includes(
+														table.table
+													)
 														? "highlight"
 														: ""
 												}`}>
@@ -685,8 +687,9 @@
 															<span
 																key={idx}
 																className={`guest-name ${
-																	highlightedGuest ===
-																	guest
+																	highlightedGuests.includes(
+																		guest
+																	)
 																		? "highlight"
 																		: ""
 																}`}>
