@@ -49,8 +49,9 @@
 			body {
 				margin: 0;
 				height: 100vh;
-				font-family: -apple-system, BlinkMacSystemFont, sans-serif,
-					sans-serif;
+				/* font-family: -apple-system, BlinkMacSystemFont, sans-serif,
+					sans-serif; */
+				font-family: "Lora", serif;
 				overflow-x: hidden;
 				background: linear-gradient(
 					315deg,
@@ -167,6 +168,9 @@
 			.nav-card {
 				max-width: 900px;
 				margin: 2rem auto;
+				@media (max-width: 768px) {
+					margin: 0rem auto;
+				}
 			}
 
 			.navbar {
@@ -180,17 +184,40 @@
 			}
 
 			.nav-link {
-				font-size: 1.1rem;
+				font-size: 2.1rem;
 				padding: 0.75rem 1.5rem !important;
-				border-radius: 25px;
+				/* border-radius: 25px; */
 				transition: all 0.3s ease;
 				color: #6c757d !important;
 				margin: 0 0.25rem;
-				font-family: "Abril Fatface", serif;
-				text-transform: uppercase;
+				font-family: "Great Vibes", cursive;
+				position: relative;
+			}
+			.nav-link::after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				height: 2px;
+				background-color: #ecece7;
+				width: 0;
+				transform: translateX(-50%);
+				transition: width 0.3s ease;
 			}
 
+			.nav-link.active {
+				color: #ecece7 !important;
+			}
+			.nav-link.active::after,
 			.nav-link:hover {
+				width: 50%;
+				color: #ffffff !important;
+				@media (min-width: 768px) {
+					width: 25%;
+				}
+			}
+
+			/* .nav-link:hover {
 				background: rgba(4, 31, 29, 0.1);
 				color: #073533 !important;
 			}
@@ -198,7 +225,7 @@
 			.nav-link.active {
 				background: #073533 !important;
 				color: white !important;
-			}
+			} */
 
 			.hero-section {
 				/* background: linear-gradient(
@@ -234,7 +261,8 @@
 			}
 
 			.section-card {
-				background: white;
+				background: #ecece7;
+				background: #fff;
 				border-radius: 20px;
 				box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 				padding: 3rem;
@@ -318,7 +346,7 @@
 			}
 
 			.event-description {
-				color: #6c757d;
+				color: #495057;
 				font-size: 1rem;
 				line-height: 1.6;
 			}
@@ -338,6 +366,8 @@
 				font-size: 1.1rem;
 				transition: all 0.3s ease;
 				width: 100%;
+				font-family: "Lora", serif;
+				font-style: italic;
 			}
 
 			.search-box input:focus {
@@ -393,6 +423,7 @@
 				font-size: 0.95rem;
 				border: 1px solid #dee2e6;
 				transition: all 0.3s ease;
+				color: #495057;
 			}
 
 			.guest-name.highlight {
@@ -417,7 +448,7 @@
 
 			.no-results {
 				text-align: center;
-				color: #6c757d;
+				color: #073533;
 				font-style: italic;
 				padding: 3rem;
 				font-size: 1.1rem;
@@ -425,27 +456,27 @@
 
 			.welcome-message {
 				text-align: center;
-				color: #6c757d;
+				color: #073533;
 				font-size: 1.1rem;
 				margin-bottom: 2rem;
 			}
 
 			@media (max-width: 768px) {
 				.hero-section h1 {
-					font-size: 2.2rem;
+					font-size: 2rem;
 				}
 				.section-card {
-					padding: 2rem;
-					margin: 1rem;
+					padding: 1.5rem;
+					margin: 0.5rem;
 				}
 				.section-title {
 					font-size: 2rem;
 				}
 				.event-item {
-					padding-left: 1.5rem;
+					padding-left: 1rem;
 				}
 				.table-card {
-					padding: 1.5rem;
+					padding: 1rem;
 				}
 			}
 
@@ -493,11 +524,16 @@
 				padding: 1rem;
 				background: #f7f7f7;
 				border-radius: 1rem;
+				@media (min-width: 768px) {
+					gap: 3rem;
+					padding: 3rem;
+				}
 			}
 
 			.hall .table {
 				position: relative;
 				width: 100%;
+				max-width: 100%;
 				aspect-ratio: 1 / 1; /* Keeps table perfectly round */
 				border-radius: 50%;
 				background: #073533;
@@ -529,6 +565,10 @@
 				font-size: 1.1rem;
 				color: #ffffff4f;
 				padding: 11px;
+
+				@media (min-width: 768px) {
+					font-size: 2.1rem;
+				}
 			}
 			.hall .table.selected:before {
 				color: #fff;
@@ -538,12 +578,16 @@
 			/* Chair base style */
 			.chair {
 				position: absolute;
+				width: 16%;
 				/* width: 20%; */
-				width: 17%;
 				aspect-ratio: 1 / 1;
 				background: #073533;
 				border-radius: 50%;
 				transform: translate(-50%, -50%);
+				border: 2px solid #073533;
+				@media (min-width: 768px) {
+					width: 20%;
+				}
 			}
 
 			/* Layout 3: 8 chairs (evenly spaced) */
@@ -1110,7 +1154,7 @@
 									<input
 										type="text"
 										className="form-control"
-										placeholder="Enter your name to find your table..."
+										placeholder="Enter your name"
 										value={searchTerm}
 										onChange={(e) =>
 											handleSearch(e.target.value)
@@ -1246,11 +1290,16 @@
 						{/* Hero Section */}
 						<div className="hero-section">
 							<div className="container">
-								<h1 className="fade-in">Thuba & Jide</h1>
+								<h1 className="fade-in">
+									<span>Thuba</span>
+									<span>&</span>
+									<span>Jide</span>
+								</h1>
 								<p className="date fade-in">
 									Wednesday, October 1st, 2025
+									{/*High House Weddings · 01.10.2025*/}
 								</p>
-								<p
+								{/*<p
 									className="fade-in"
 									style={{
 										fontSize: "1.1rem",
@@ -1258,13 +1307,13 @@
 									}}>
 									<i className="fas fa-map-marker-alt me-2"></i>
 									High House Weddings
-								</p>
+								</p>*/}
 							</div>
 							{/* Navigation */}
 							<div className="container">
 								<div className="nav-card">
 									<nav className="navbar navbar-expand-lg navbar-light w-100">
-										<div className="navbar-nav w-100 d-flex justify-content-around">
+										<div className="navbar-nav w-100 d-flex flex-row justify-content-around">
 											<button
 												className={`nav-link btn btn-link w-100 ${
 													currentPage === "events"
@@ -1274,7 +1323,7 @@
 												onClick={() =>
 													setCurrentPage("events")
 												}>
-												<i className="fa-solid fa-clipboard-list me-2"></i>
+												{/*<i className="fa-solid fa-clipboard-list me-2"></i>*/}
 												Schedule
 											</button>
 											<button
@@ -1286,7 +1335,7 @@
 												onClick={() =>
 													setCurrentPage("seating")
 												}>
-												<i className="fa-solid fa-chair me-2"></i>
+												{/*<i className="fa-solid fa-chair me-2"></i>*/}
 												Seating
 											</button>
 										</div>
