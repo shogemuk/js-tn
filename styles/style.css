@@ -814,6 +814,9 @@ body {
 	color: #ecece7;
 }
 
+/* BODY CONFETTI */
+/* END BODY CONFETTI */
+
 /* BODY DISCO */
 .disco-container {
 	position: fixed;
@@ -886,11 +889,33 @@ body.disco .waves-container {
 	position: relative;
 	height: 100vh;
 	overflow-x: hidden;
-	background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+	background: radial-gradient(ellipse at bottom, #26374b 0%, #151723 100%);
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
 	font-family: "Lato", sans-serif;
+}
+
+/* Container management */
+.sparkle-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+	pointer-events: none;
+	z-index: 0;
+	opacity: 0;
+	transition: opacity 4s ease;
+}
+
+.sparkle .sparkle-container {
+	opacity: 1;
+}
+
+.sparkle .waves-container {
+	display: none;
 }
 
 /* Small stars - 700 stars equivalent */
@@ -1041,28 +1066,6 @@ body.disco .waves-container {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
-}
-
-/* Container management */
-.sparkle-container {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100vh;
-	overflow: hidden;
-	pointer-events: none;
-	z-index: -1;
-	opacity: 0;
-	transition: opacity 4s ease;
-}
-
-.sparkle .sparkle-container {
-	opacity: 1;
-}
-
-.sparkle .waves-container {
-	display: none;
 }
 
 /* Enhanced starfield animation with slight variations */
