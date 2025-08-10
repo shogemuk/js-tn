@@ -201,7 +201,8 @@
 				font-style: italic;
 				font-weight: 700;
 				background: #073533;
-				color: #f7f7f7;
+				color: #ecece7;
+				border-radius: 50px;
 			}
 
 			.nav-card {
@@ -864,6 +865,16 @@
 				opacity: 0.5;
 			}
 
+			.scroll-to-top .btn {
+				font-family: "Lora", serif;
+				font-optical-sizing: auto;
+				font-style: italic;
+				font-weight: 700;
+				border-color: #073533;
+				background-color: #073533;
+				color: #ecece7;
+			}
+
 			/* .page-seating .section-title {
 				color: #350717;
 			}
@@ -914,7 +925,7 @@
 					time: "5:00 PM",
 					title: "Feast Time – Wedding Breakfast",
 					description:
-						"Dinner will be served in the Orangery. Please find your assigned table and enjoy a three-course meal.",
+						"Dinner will be served in the Orangery. Please find your assigned table and enjoy a four-course meal.",
 					icon: "fas fa-utensils",
 				},
 				{
@@ -1200,6 +1211,13 @@
 					setHighlightedGuests(matchingGuests);
 				};
 
+				const scrollToTop = () => {
+					window.scrollTo({
+						top: 0,
+						behavior: "smooth",
+					});
+				};
+
 				const closeModal = () => {
 					console.log("WAKEUP");
 					document.querySelector(".modal").classList.remove("show");
@@ -1260,6 +1278,18 @@
 									style={{ color: "#6c757d" }}>
 									{randomJoke.joke}
 								</p>
+								<div className="text-center mt-3 scroll-to-top">
+									<button
+										className="btn btn-sm btn-outline-secondary"
+										onClick={scrollToTop}
+										style={{
+											borderRadius: "50px",
+											padding: "8px 16px",
+										}}>
+										<i className="fas fa-arrow-up me-1"></i>
+										Back to Top
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -1289,6 +1319,11 @@
 										onChange={(e) =>
 											handleSearch(e.target.value)
 										}
+										onKeyDown={(e) => {
+											if (e.key === "Enter") {
+												e.target.blur();
+											}
+										}}
 									/>
 									<i className="fas fa-search"></i>
 								</div>
@@ -1414,6 +1449,18 @@
 									Please let us know about any dietary
 									restrictions or allergies
 								</p>
+								<div className="text-center mt-3 scroll-to-top">
+									<button
+										className="btn btn-sm btn-outline-secondary"
+										onClick={scrollToTop}
+										style={{
+											borderRadius: "50px",
+											padding: "8px 16px",
+										}}>
+										<i className="fas fa-arrow-up me-1"></i>
+										Back to Top
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
