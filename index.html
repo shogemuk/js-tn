@@ -29,15 +29,15 @@
 		<style>
 			.shimmer-text {
 				background: linear-gradient(
-					rgb(255, 177, 67),
-					rgb(89, 63, 35),
-					rgb(255, 177, 67)
+					rgba(255, 177, 67, 1),
+					rgba(89, 63, 35, 1),
+					rgba(255, 177, 67, 1)
 				);
 				background-size: 100% 400%;
 				background-clip: text;
 				-webkit-background-clip: text;
 				color: transparent;
-				animation: shimmer 3s linear infinite;
+				animation: shimmer 53s linear infinite;
 			}
 
 			@keyframes shimmer {
@@ -564,6 +564,29 @@
 			}
 
 			.hall {
+				background: #f7f7f7;
+				border-radius: 1rem;
+				padding-top: 10px;
+			}
+
+			.high-table {
+				width: 50%;
+				min-height: 5px;
+				border-radius: 5px;
+				background-color: #073533;
+				margin: 0 auto;
+				font-size: 1.1rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-family: "Great Vibes", cursive;
+				color: #fff;
+			}
+			.high-table span {
+				padding: 5px;
+			}
+
+			.hall-container {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
 				width: 100%;
@@ -571,8 +594,6 @@
 				gap: 1rem;
 				box-sizing: border-box;
 				padding: 1rem;
-				background: #f7f7f7;
-				border-radius: 1rem;
 				@media (min-width: 768px) {
 					gap: 3rem;
 					padding: 3rem;
@@ -1573,75 +1594,84 @@
 											)}
 
 											<div className="hall">
-												{seatingChart
-													.filter(
-														(table) => table.table
-													)
-													.map((table) => {
-														const guestCount =
-															table.guests.length;
-														const layoutClass = `layout-${guestCount}`;
-														const selectedGuestIndex =
-															selectedGuest
-																? table.guests.indexOf(
-																		selectedGuest
-																  )
-																: -1;
+												<div className="high-table">
+													<span className="shimmer-text">
+														High Table
+													</span>
+												</div>
+												<div className="hall-container">
+													{seatingChart
+														.filter(
+															(table) =>
+																table.table
+														)
+														.map((table) => {
+															const guestCount =
+																table.guests
+																	.length;
+															const layoutClass = `layout-${guestCount}`;
+															const selectedGuestIndex =
+																selectedGuest
+																	? table.guests.indexOf(
+																			selectedGuest
+																	  )
+																	: -1;
 
-														return (
-															<div
-																key={
-																	table.table
-																}
-																className={`table ${
-																	selectedTable ===
-																	table.table
-																		? "selected"
-																		: ""
-																} ${layoutClass}`}
-																data-name={
-																	table.table
-																}>
-																{/* Generate chairs dynamically based on guest count */}
-																{Array.from(
-																	{
-																		length: guestCount,
-																	},
-																	(
-																		_,
-																		index
-																	) => (
-																		<div
-																			key={
-																				index
-																			}
-																			className={`chair ${
-																				selectedTable ===
-																					table.table &&
-																				index ===
-																					selectedGuestIndex
-																					? "highlighted"
-																					: ""
-																			}`}
-																			title={
-																				table
-																					.guests[
+															return (
+																<div
+																	key={
+																		table.table
+																	}
+																	className={`table ${
+																		selectedTable ===
+																		table.table
+																			? "selected"
+																			: ""
+																	} ${layoutClass}`}
+																	data-name={
+																		table.table
+																	}>
+																	{/* Generate chairs dynamically based on guest count */}
+																	{Array.from(
+																		{
+																			length: guestCount,
+																		},
+																		(
+																			_,
+																			index
+																		) => (
+																			<div
+																				key={
 																					index
-																				]
-																			} // Shows guest name on hover
-																		></div>
-																	)
-																)}
+																				}
+																				className={`chair ${
+																					selectedTable ===
+																						table.table &&
+																					index ===
+																						selectedGuestIndex
+																						? "highlighted"
+																						: ""
+																				}`}
+																				title={
+																					table
+																						.guests[
+																						index
+																					]
+																				} // Shows guest name on hover
+																			></div>
+																		)
+																	)}
 
-																{/* Table name */}
-																{/*<div className="table-name">
+																	{/* Table name */}
+																	{/*<div className="table-name">
 																	{
 																		table.table
 																	}
 																</div>*/}
-															</div>
-														);
-													})}
+																</div>
+															);
+														})}
+												</div>
 											</div>
 										</div>
 										<div className="modal-footer">
