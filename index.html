@@ -393,7 +393,6 @@
 
 			.search-box {
 				position: relative;
-				margin-bottom: 2rem;
 				max-width: 500px;
 				margin-left: auto;
 				margin-right: auto;
@@ -1214,19 +1213,19 @@
 				const handleSearch = (term) => {
 					setSearchTerm(term);
 
-					if (term.length < 2) {
+					const cleanTerm = term.trim().toLowerCase();
+
+					if (cleanTerm.length < 2) {
 						setHighlightedTables([]);
 						setHighlightedGuests([]);
 						return;
 					}
-
-					// Find ALL matching guests and tables
 					const matchingTables = [];
 					const matchingGuests = [];
 
 					seatingChart.forEach((table) => {
 						const matchingGuest = table.guests.find((guest) =>
-							guest.toLowerCase().includes(term.toLowerCase())
+							guest.trim().toLowerCase().includes(cleanTerm)
 						);
 
 						if (matchingGuest) {
@@ -1238,12 +1237,16 @@
 					setHighlightedTables(matchingTables);
 					setHighlightedGuests(matchingGuests);
 				};
-
 				const scrollToTop = () => {
 					window.scrollTo({
 						top: 0,
 						behavior: "smooth",
 					});
+				};
+				const clearSearch = () => {
+					setSearchTerm("");
+					setHighlightedTables([]);
+					setHighlightedGuests([]);
 				};
 
 				const closeModal = () => {
@@ -1338,7 +1341,7 @@
 									</p>
 								</div>
 
-								<div className="search-box">
+								<div className="search-box mb-3">
 									<input
 										type="text"
 										className="form-control"
@@ -1353,12 +1356,19 @@
 											}
 										}}
 									/>
-									<i className="fas fa-search"></i>
+									{searchTerm.trim().length > 0 ? (
+										<i
+											className="fas fa-times"
+											onClick={clearSearch}
+											style={{ cursor: "pointer" }}></i>
+									) : (
+										<i className="fas fa-search"></i>
+									)}
 								</div>
 								{searchTerm.length >= 2 &&
 									highlightedTables.length > 0 && (
 										<div className="row">
-											<div className="search-results-count mb-5">
+											<div className="search-results-count mb-4 text-center">
 												Found{" "}
 												<span>
 													{highlightedTables.length}{" "}
@@ -1372,7 +1382,7 @@
 											</div>
 										</div>
 									)}
-								{searchTerm.length >= 2 &&
+								{searchTerm.trim().length >= 2 &&
 									highlightedTables.length === 0 && (
 										<div className="no-results">
 											<i className="fas fa-exclamation-circle me-2"></i>
@@ -1415,12 +1425,16 @@
 															<span
 																key={idx}
 																className={`guest-name ${
-																	searchTerm.length >=
+																	searchTerm.trim()
+																		.length >=
 																		2 &&
 																	guest
+																		.trim()
 																		.toLowerCase()
 																		.includes(
-																			searchTerm.toLowerCase()
+																			searchTerm
+																				.trim()
+																				.toLowerCase()
 																		)
 																		? "highlight"
 																		: ""
@@ -1448,18 +1462,6 @@
 										</div>
 									))}
 								</div>
-
-								{searchTerm.length < 2 && (
-									<div className="text-center mt-4">
-										<small
-											className="text-muted"
-											style={{ fontSize: "1rem" }}>
-											<i className="fas fa-info-circle me-2"></i>
-											Type at least 2 characters to search
-											for your name
-										</small>
-									</div>
-								)}
 							</div>
 
 							<div className="footer-info">
