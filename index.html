@@ -454,10 +454,16 @@
 				font-style: normal;
 			}
 
+			.guests {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 0.5rem;
+			}
+
 			.guest-name {
 				background: #f8f9fa;
 				padding: 0.5rem 1rem;
-				margin: 0.3rem;
 				border-radius: 20px;
 				display: inline-block;
 				font-size: 0.95rem;
@@ -472,6 +478,7 @@
 				border-color: #073533;
 				animation: pulse 1.5s infinite;
 				transform: scale(1.05);
+				order: -1;
 			}
 
 			@keyframes pulse {
