@@ -67,6 +67,14 @@
 				position: relative;
 			}
 
+			body.page-seating {
+				background: linear-gradient(
+					315deg,
+					rgb(31, 4, 13) 3%,
+					rgb(53, 7, 23) 38%
+				);
+			}
+
 			/* Gradient background animation */
 			@keyframes gradient {
 				0% {
@@ -470,7 +478,7 @@
 					margin: 0.5rem;
 				}
 				.section-title {
-					font-size: 2rem;
+					font-size: 2.5rem;
 				}
 				.event-item {
 					padding-left: 1rem;
@@ -1049,6 +1057,22 @@
 				const [showModal, setShowModal] = useState(false);
 				const [selectedTable, setSelectedTable] = useState("");
 				const [selectedGuest, setSelectedGuest] = useState("");
+
+				useEffect(() => {
+					document.body.classList.remove(
+						"page-events",
+						"page-seating"
+					);
+
+					document.body.classList.add(`page-${currentPage}`);
+
+					return () => {
+						document.body.classList.remove(
+							"page-events",
+							"page-seating"
+						);
+					};
+				}, [currentPage]);
 
 				const handleSearch = (term) => {
 					setSearchTerm(term);
