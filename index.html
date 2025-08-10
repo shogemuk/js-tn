@@ -506,6 +506,8 @@
 				margin-top: 2rem;
 				text-align: center;
 				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 0;
 			}
 
 			html,
@@ -1175,7 +1177,7 @@
 													? "s"
 													: ""}{" "}
 												with guests matching "
-												{searchTerm}"
+												<strong>{searchTerm}</strong>"
 											</div>
 										</div>
 									)}
@@ -1222,9 +1224,13 @@
 															<span
 																key={idx}
 																className={`guest-name ${
-																	highlightedGuests.includes(
-																		guest
-																	)
+																	searchTerm.length >=
+																		2 &&
+																	guest
+																		.toLowerCase()
+																		.includes(
+																			searchTerm.toLowerCase()
+																		)
 																		? "highlight"
 																		: ""
 																}`}
