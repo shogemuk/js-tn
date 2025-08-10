@@ -316,6 +316,7 @@ strong {
 	padding: 0;
 	border: none;
 	background: transparent;
+	text-align: left;
 }
 
 .event-description {
