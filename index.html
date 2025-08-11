@@ -60,6 +60,7 @@
 					d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z" />
 			</svg>
 		</div>
+		<div class="confetti-container"></div>
 		<div id="root"></div>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
@@ -77,6 +78,7 @@
 					description:
 						"Please be seated by 12:45 PM. The ceremony will take place in the Gazebo with beautiful views of the countryside.",
 					icon: "fas fa-heart",
+					easter: "confetti",
 				},
 				{
 					time: "1:30 PM",
@@ -309,6 +311,131 @@
 				},
 			];
 
+			function triggerIconic() {
+				const iconMappings = {
+					confetti: {
+						icon: ".fa-heart",
+						animationClass: "fa-beat-fade",
+					},
+					disco: {
+						icon: ".fa-glass-cheers",
+						animationClass: "fa-spin",
+					},
+					sparkle: {
+						icon: ".fa-wand-sparkles",
+						animationClass: "fa-bounce",
+					},
+				};
+
+				// For each mapping, add animation if body has class, remove if it doesn't
+				Object.keys(iconMappings).forEach((bodyClass) => {
+					const mapping = iconMappings[bodyClass];
+					const icon = document.querySelector(mapping.icon);
+
+					if (icon) {
+						if (document.body.classList.contains(bodyClass)) {
+							// Body has the class, add the animation
+							icon.classList.add(mapping.animationClass);
+						} else {
+							// Body doesn't have the class, remove the animation
+							icon.classList.remove(mapping.animationClass);
+						}
+					}
+				});
+			}
+
+			function triggerConfetti() {
+				const confettiWrapper = document.querySelector(
+					".confetti-container"
+				);
+				const confettiIcon = document.querySelector(".fa-heart");
+
+				// If confetti is already running, stop it
+				if (confettiWrapper.dataset.running === "true") {
+					confettiWrapper.innerHTML = "";
+					confettiWrapper.dataset.running = "false";
+					document.body.classList.remove("confetti");
+					return;
+				}
+
+				// Mark confetti as running
+				confettiWrapper.dataset.running = "true";
+
+				// Function to add a batch of confetti
+				function addConfettiBatch() {
+					if (confettiWrapper.dataset.running !== "true") return;
+					document.body.classList = "";
+					document.body.classList.add("confetti");
+
+					for (let i = 0; i < 10; i++) {
+						const confetti = document.createElement("div");
+						confetti.classList.add("confetti-piece");
+						confetti.style.left = `${Math.random() * 100}%`;
+						confetti.style.setProperty(
+							"--fall-duration",
+							`${Math.random() * 3 + 3}s`
+						);
+						confetti.style.setProperty(
+							"--confetti-color",
+							getRandomColor()
+						);
+						confettiWrapper.appendChild(confetti);
+
+						// Remove individual confetti pieces after they fall
+						setTimeout(() => {
+							if (confetti.parentNode) {
+								confetti.remove();
+							}
+						}, 6000);
+					}
+				}
+
+				// Add initial batch
+				addConfettiBatch();
+
+				// Continue adding batches every 500ms
+				const interval = setInterval(() => {
+					if (confettiWrapper.dataset.running === "true") {
+						addConfettiBatch();
+					} else {
+						document.body.classList.remove("confetti");
+						confettiIcon.classList.remove("fa-beat-fade");
+						clearInterval(interval);
+					}
+				}, 1000);
+			}
+
+			function stopConfetti() {
+				const confettiWrapper = document.querySelector(
+					".confetti-container"
+				);
+
+				const confettiIcon = document.querySelector(".fa-heart");
+				if (confettiWrapper.dataset.running === "true") {
+					confettiWrapper.innerHTML = "";
+					confettiWrapper.dataset.running = "false";
+					document.body.classList.remove("confetti"); // Make sure this line is here
+					confettiIcon.classList.remove("fa-beat-fade");
+					if (confettiInterval) {
+						clearInterval(confettiInterval);
+						confettiInterval = null;
+					}
+				}
+			}
+
+			function getRandomColor() {
+				const colors = [
+					"#ffffff", // pure white
+					"#f5f5f5", // soft white
+					"#ffda9e",
+					"#f3ce92",
+					"#e0bb7f",
+					"#c19c60",
+					"#8f6a2e",
+				];
+				return colors[Math.floor(Math.random() * colors.length)];
+			}
+
 			function WeddingPage() {
 				const [currentPage, setCurrentPage] = useState("events");
 				const [searchTerm, setSearchTerm] = useState("");
@@ -396,7 +523,6 @@
 				};
 
 				const closeModal = () => {
-					console.log("WAKEUP");
 					document.querySelector(".modal").classList.remove("show");
 					document
 						.querySelector(".modal-backdrop")
@@ -438,23 +564,56 @@
 												<button
 													className="event-title"
 													onClick={() => {
-														const body =
-															document.body;
 														if (
-															body.classList.contains(
-																event.easter
-															)
+															event.easter ===
+															"confetti"
 														) {
-															// If class is already there, remove it (toggle off)
-															body.classList.remove(
-																event.easter
-															);
-														} else {
-															// Otherwise, clear all classes and add the new one
-															body.className = "";
-															body.classList.add(
-																event.easter
-															);
+															triggerConfetti();
+															setTimeout(() => {
+																triggerIconic();
+															}, 50);
+														} else if (
+															event.easter
+														) {
+															// First stop confetti
+															const confettiWrapper =
+																document.querySelector(
+																	".confetti-container"
+																);
+															if (
+																confettiWrapper
+																	.dataset
+																	.running ===
+																"true"
+															) {
+																confettiWrapper.innerHTML =
+																	"";
+																confettiWrapper.dataset.running =
+																	"false";
+															}
+
+															// Then handle the new easter egg
+															const body =
+																document.body;
+															if (
+																body.classList.contains(
+																	event.easter
+																)
+															) {
+																body.classList.remove(
+																	event.easter
+																);
+															} else {
+																body.className =
+																	"";
+																body.classList.add(
+																	event.easter
+																);
+															}
+
+															setTimeout(() => {
+																triggerIconic();
+															}, 10);
 														}
 													}}>
 													{event.title}
