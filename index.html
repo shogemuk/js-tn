@@ -367,7 +367,7 @@
 					document.body.classList = "";
 					document.body.classList.add("confetti");
 
-					for (let i = 0; i < 10; i++) {
+					for (let i = 0; i < 5; i++) {
 						const confetti = document.createElement("div");
 						confetti.classList.add("confetti-piece");
 						confetti.style.left = `${Math.random() * 100}%`;
@@ -402,7 +402,7 @@
 						confettiIcon.classList.remove("fa-beat-fade");
 						clearInterval(interval);
 					}
-				}, 1000);
+				}, 2000);
 			}
 
 			function stopConfetti() {
