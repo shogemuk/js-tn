@@ -10,6 +10,10 @@
 	color: transparent;
 	animation: shimmer 53s linear infinite;
 }
+* {
+	transition: color 0.5s ease, background-color 0.5s ease,
+		border-color 0.5s ease;
+}
 
 body {
 	/* background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); */
@@ -292,6 +296,7 @@ strong {
 	border-radius: 50%;
 	border: 4px solid white;
 	box-shadow: 0 0 0 2px #073533;
+	transition: all 0.5s ease;
 }
 
 .event-time {
@@ -880,8 +885,8 @@ body.confetti .footer-info {
 }
 /* END BODY CONFETTI */
 
-/* BODY DISCO */
-.disco-container {
+/* BODY ORANGERY */
+.orangery-container {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -893,17 +898,17 @@ body.confetti .footer-info {
 	transition: opacity 4s ease;
 }
 
-body.disco .disco-container {
-	opacity: 1; /* show only when body has disco */
+body.orangery .orangery-container {
+	opacity: 1; /* show only when body has orangery */
 }
 
-body.disco {
+body.orangery {
 	background-color: #0d0d0d;
 	margin: 0;
 	overflow-x: hidden;
 }
 
-body.disco svg {
+body.orangery svg {
 	width: 100%;
 	height: 100vh;
 	background-color: #f75f00;
@@ -919,33 +924,95 @@ body.disco svg {
 	}
 }
 
-body.disco .out-top {
+body.orangery .out-top {
 	animation: rotate 20s linear infinite;
 	transform-origin: 13px 25px;
-	fill: #9b5de5;
+	fill: #ff7f50; /* Coral */
 }
 
-body.disco .in-top {
+body.orangery .in-top {
 	animation: rotate 10s linear infinite;
 	transform-origin: 13px 25px;
-	fill: #f15bb5;
+	fill: #ffa500; /* Orange */
 }
 
-body.disco .out-bottom {
+body.orangery .out-bottom {
 	animation: rotate 25s linear infinite;
 	transform-origin: 84px 93px;
-	fill: #00bbf9;
+	fill: #ff8c00; /* Dark Orange */
 }
 
-body.disco .in-bottom {
+body.orangery .in-bottom {
 	animation: rotate 15s linear infinite;
 	transform-origin: 84px 93px;
-	fill: #00f5d4;
+	fill: #ffd700; /* Gold */
 }
-body.disco .waves-container {
+body.orangery .waves-container {
 	display: none;
 }
-/* END BODY DISCO */
+
+body.orangery .section-title,
+body.orangery .event-title {
+	color: #575049;
+}
+body.orangery .event-time,
+body.orangery .table-number {
+	color: #ffa200;
+}
+body.orangery .event-item {
+	border-color: #ffa200;
+	border-left-style: dotted;
+}
+body.orangery .event-item:before {
+	background: #ffa200;
+	box-shadow: 0 0 0 2px #ffa200;
+	border: 1px solid white;
+	top: 0;
+}
+body.orangery .scroll-to-top .btn {
+	border-color: #ffa200;
+	background-color: #ffa200;
+	color: #fff;
+}
+body.orangery .table-card:hover,
+body.orangery .table-card.highlight {
+	border-color: #ffa200;
+}
+body.orangery .hall .table,
+body.orangery .hall .chair,
+body.orangery .high-table {
+	background: #ffa200;
+}
+body.orangery .hall .chair {
+	border-color: #ffa200;
+}
+body.orangery .hall .chair.highlighted {
+	background-color: #073533;
+}
+
+body.orangery,
+body.orangery .hero-section .date,
+body.orangery .search-box input,
+body.orangery .btn-secondary,
+body.orangery .scroll-to-top .btn {
+	font-family: "Alice", serif;
+	font-style: normal;
+}
+
+body.orangery .event-time,
+body.orangery .event-title,
+body.orangery .table-number {
+	font-family: "Quicksand", sans-serif;
+	font-weight: 700;
+}
+
+body.orangery .section-title,
+body.orangery .nav-link,
+body.orangery .hall .table,
+body.orangery .high-table {
+	font-family: "Fleur De Leah", cursive;
+}
+/* END BODY ORANGERY */
 
 /* BODY STARLIGHT */
 .sparkle {
@@ -956,7 +1023,6 @@ body.disco .waves-container {
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
-	font-family: "Lato", sans-serif;
 }
 
 /* Container management */
@@ -1131,6 +1197,96 @@ body.disco .waves-container {
 	background-clip: text;
 }
 
+body.sparkle .section-title,
+body.sparkle .event-title {
+	color: #494d57;
+}
+body.sparkle .event-time,
+body.sparkle .table-number {
+	color: #2262b5;
+}
+body.sparkle .event-item {
+	border-color: #2262b5;
+	border-left-style: dashed;
+	border-left-width: 1px;
+}
+body.sparkle .event-item:before {
+	background: #2262b5;
+	box-shadow: 0 0 0 1px #2262b5;
+	border: 4px solid white;
+	top: 0;
+	border-radius: 0;
+	transform: rotate(45deg);
+}
+body.sparkle .scroll-to-top .btn {
+	border-color: #2262b5;
+	background-color: #2262b5;
+	color: #fff;
+}
+body.sparkle .table-card:hover,
+body.sparkle .table-card.highlight {
+	border-color: #2262b5;
+}
+body.sparkle .hall .table,
+body.sparkle .hall .chair,
+body.sparkle .high-table {
+	background: #2262b5;
+}
+body.sparkle .hall .chair {
+	border-color: #2262b5;
+}
+body.sparkle .btn-secondary {
+	background: #2262b5;
+}
+body.sparkle .guest-name {
+	background-color: #e5ebf7;
+	border-color: #d7dde3;
+}
+body.sparkle .guest-name.highlight {
+	background: #2262b5;
+}
+body.sparkle .table-card {
+	background: linear-gradient(135deg, #ffffff 0%, #d2dce5 100%);
+}
+body.sparkle .hall .chair.highlighted {
+	background-color: #c49a6c;
+}
+
+body.sparkle,
+body.sparkle .hero-section .date,
+body.sparkle .search-box input,
+body.sparkle .btn-secondary,
+body.sparkle .scroll-to-top .btn {
+	font-family: "Quicksand", sans-serif;
+	font-style: normal;
+}
+
+body.sparkle .event-time,
+body.sparkle .event-title,
+body.sparkle .table-number {
+	font-family: "Quicksand", sans-serif;
+	/* font-weight: 700; */
+}
+
+body.sparkle .section-title,
+body.sparkle .nav-link,
+body.sparkle .hall .table,
+body.sparkle .high-table {
+	font-family: "Sacramento", cursive;
+}
+
+body.sparkle .section-card,
+body.sparkle .search-box input,
+body.sparkle .table-card,
+body.sparkle .guest-name {
+	border-top-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+body.sparkle .scroll-to-top .btn,
+body.sparkle .btn-secondary {
+	border-radius: 0.5rem !important;
+}
 /* Enhanced starfield animation with slight variations */
 @keyframes animStar {
 	from {
@@ -1167,9 +1323,207 @@ body.disco .waves-container {
 }
 /* END BODY STARLIGHT */
 
-/* BODY CONFETT */
+/* BODY DISCO */
+@keyframes move {
+	100% {
+		transform: translate3d(0, 0, 1px) rotate(360deg);
+	}
+}
 
-/* END BODY CONFETTI */
+@keyframes discoBackground {
+	0% {
+		background: #0d0d26;
+	} /* deep indigo-black */
+	20% {
+		background: #5f23af;
+	} /* purple tone */
+	40% {
+		background: #2df4ff;
+	} /* electric cyan */
+	60% {
+		background: #ff2d95;
+	} /* neon pink */
+	80% {
+		background: #ffe600;
+	} /* vivid yellow */
+	100% {
+		background: #0d0d26;
+	} /* back to dark */
+}
+
+.disco-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	pointer-events: none;
+	opacity: 0;
+	z-index: -1;
+	transition: opacity 4s ease;
+	background: #3e1e68;
+	/* animation: discoBackground 15s linear infinite; */
+	animation: discoBackground 2s steps(2) infinite;
+}
+
+body.disco .disco-container {
+	opacity: 1;
+}
+
+body.disco .disco-container span {
+	width: 19vmin;
+	height: 19vmin;
+	border-radius: 19vmin;
+	backface-visibility: hidden;
+	position: absolute;
+	animation: move;
+	animation-duration: 50;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+body.disco .disco-container span:nth-child(0) {
+	color: #ff2d95;
+	top: 2%;
+	left: 63%;
+	animation-duration: 6s;
+	animation-delay: -1s;
+	transform-origin: 22vw 9vh;
+	box-shadow: 38vmin 0 5.667296492146332vmin currentColor;
+}
+body.disco .disco-container span:nth-child(1) {
+	color: #2df4ff;
+	top: 100%;
+	left: 6%;
+	animation-duration: 6s;
+	animation-delay: -1s;
+	transform-origin: -17vw 12vh;
+	box-shadow: 38vmin 0 5.611319214433229vmin currentColor;
+}
+body.disco .disco-container span:nth-child(2) {
+	color: #ffe600;
+	top: 10%;
+	left: 43%;
+	animation-duration: 6s;
+	animation-delay: -1s;
+	transform-origin: 17vw 12vh;
+	box-shadow: -38vmin 0 4.798676059727555vmin currentColor;
+}
+body.disco .disco-container span:nth-child(3) {
+	color: #00ff85;
+	top: 60%;
+	left: 78%;
+	animation-duration: 6s;
+	animation-delay: -1s;
+	transform-origin: -17vw -9vh;
+	box-shadow: 38vmin 0 5.483209350973999vmin currentColor;
+}
+body.disco .disco-container span:nth-child(4) {
+	color: #ffe600;
+	top: 32%;
+	left: 10%;
+	animation-duration: 6s;
+	animation-delay: -1s;
+	transform-origin: 6vw -11vh;
+	box-shadow: 38vmin 0 5.091439906530725vmin currentColor;
+}
+body.disco .disco-container span:nth-child(5) {
+	color: #ffe600;
+	top: 84%;
+	left: 50%;
+	animation-duration: 6s;
+	animation-delay: -1s;
+	transform-origin: -14vw 1vh;
+	box-shadow: 38vmin 0 4.843846044960424vmin currentColor;
+}
+body.disco .disco-container span:nth-child(6) {
+	color: #00ff85;
+	top: 24%;
+	left: 90%;
+	animation-duration: 6s;
+	animation-delay: -1s;
+	transform-origin: 1vw 15vh;
+	box-shadow: -38vmin 0 5.748576128255703vmin currentColor;
+}
+body.disco .disco-container span:nth-child(7) {
+	color: #ffe600;
+	top: 14%;
+	left: 87%;
+	animation-duration: 6s;
+	animation-delay: -1s;
+	transform-origin: 9vw -7vh;
+	box-shadow: 38vmin 0 4.978162619497049vmin currentColor;
+}
+body.disco .disco-container span:nth-child(8) {
+	color: #00ff85;
+	top: 94%;
+	left: 1%;
+	animation-duration: 6s;
+	animation-delay: -1s;
+	transform-origin: -12vw -13vh;
+	box-shadow: -38vmin 0 5.248017011481602vmin currentColor;
+}
+body.disco .disco-container span:nth-child(9) {
+	color: #ff2d95;
+	top: 51%;
+	left: 76%;
+	animation-duration: 6s;
+	animation-delay: -1s;
+	transform-origin: -14vw 1vh;
+	box-shadow: -38vmin 0 5.4320560826261vmin currentColor;
+}
+body.disco .disco-container span:nth-child(10) {
+	color: #00ff85;
+	top: 32%;
+	left: 15%;
+	animation-duration: 6s;
+	animation-delay: -1s;
+	transform-origin: 21vw -22vh;
+	box-shadow: -38vmin 0 5.313552790430525vmin currentColor;
+}
+body.disco .disco-container span:nth-child(11) {
+	color: #00ff85;
+	top: 54%;
+	left: 99%;
+	animation-duration: 6s;
+	animation-delay: -1s;
+	transform-origin: 15vw 13vh;
+	box-shadow: 38vmin 0 5.604231932959058vmin currentColor;
+}
+
+body.disco .event-time,
+body.disco .event-title,
+body.disco .table-number {
+	font-family: "Fontdiner Swanky", serif;
+
+	animation: discoColors 2s linear infinite,
+		discoFlicker 1s infinite alternate;
+}
+
+body.disco .section-title,
+body.disco .nav-link,
+body.disco .hall .table,
+body.disco .high-table {
+}
+
+@keyframes discoColors {
+	0% {
+		color: #ff2d95;
+	}
+	25% {
+		color: #2df4ff;
+	}
+	50% {
+		color: #ffe600;
+	}
+	75% {
+		color: #00ff85;
+	}
+	100% {
+		color: #ff2d95;
+	}
+}
+/* END BODY DISCOI */
 
 @keyframes shimmer {
 	0% {
