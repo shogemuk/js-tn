@@ -18,7 +18,7 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alice&family=Fleur+De+Leah&family=Fontdiner+Swanky&family=Great+Vibes&family=Lora:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300..700&family=Sacramento&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alice&family=Borel&family=Festive&family=Fleur+De+Leah&family=Great+Vibes&family=Lora:ital,wght@0,400..700;1,400..700&family=Lovers+Quarrel&family=Poiret+One&family=Quicksand:wght@300..700&family=Sacramento&display=swap"
 			rel="stylesheet" />
 		<link
 			href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
@@ -84,6 +84,32 @@
 			</svg>
 		</div>
 		<div class="confetti-container"></div>
+		<div class="hearts-container">
+			<svg
+				id="hearts"
+				viewBox="-600 -400 1200 800"
+				preserveAspectRatio="xMidYMid slice"
+				style="
+					position: fixed;
+					top: 0;
+					left: 0;
+					width: 100vw;
+					height: 100vh;
+					pointer-events: none;
+					z-index: -1;
+					opacity: 0;
+					transition: opacity 0.5s;
+				">
+				<defs>
+					<symbol id="heart" viewBox="-69 -16 138 138">
+						<path
+							d="M0,12
+							C 50,-30 110,50  0,120
+							C-110,50 -50,-30 0,12z" />
+					</symbol>
+				</defs>
+			</svg>
+		</div>
 		<div id="root"></div>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
@@ -92,6 +118,29 @@
 
 		<script type="text/babel">
 			const { useState, useEffect } = React;
+			// const colors = [
+			// 	"#e03776",
+			// 	"#8f3e98",
+			// 	"#4687bf",
+			// 	"#3bab6f",
+			// 	"#f9c25e",
+			// 	"#f47274",
+			// ];
+			const colors = [
+				"#0f5a4f",
+				"#0d4d44",
+				"#0a4039",
+				"#083a36",
+				"#073533",
+				"#052b29",
+				"#04201f",
+				"#021615",
+			];
+			const SVG_NS = "http://www.w3.org/2000/svg";
+			const SVG_XLINK = "http://www.w3.org/1999/xlink";
+			let heartsRy = [];
+			let heartAnimationFrame = null;
+			let heartsInitialized = false;
 
 			// Sample data - customize this for your wedding
 			const weddingEvents = [
@@ -131,6 +180,7 @@
 					description:
 						"Join the newlyweds as they share their magical first dance together.",
 					icon: "fas fa-music",
+					easter: "heart",
 				},
 				{
 					time: "7:45 PM",
@@ -353,6 +403,11 @@
 						icon: ".fa-wand-sparkles",
 						animationClass: "fa-flip",
 					},
+					heart: {
+						// ← Added this entire block
+						icon: ".fa-music",
+						animationClass: "fa-beat-fade",
+					},
 				};
 
 				// For each mapping, add animation if body has class, remove if it doesn't
@@ -462,6 +517,89 @@
 					"#8f6a2e",
 				];
 				return colors[Math.floor(Math.random() * colors.length)];
+			}
+
+			// ← Added all these heart functions below
+			function initializeHearts() {
+				if (heartsInitialized) return;
+
+				const heartsContainer = document.getElementById("hearts");
+				if (!heartsContainer) return;
+
+				heartsRy = [];
+				heartsContainer.innerHTML = `
+        <defs>
+            <symbol id="heart" viewBox="-69 -16 138 138">
+                <path d="M0,12
+                        C 50,-30 110,50  0,120
+                        C-110,50 -50,-30 0,12z"/>
+            </symbol>
+        </defs>
+    `;
+
+				function useTheHeart(n) {
+					let use = document.createElementNS(SVG_NS, "use");
+					use.n = n;
+					use.setAttributeNS(SVG_XLINK, "xlink:href", "#heart");
+					use.setAttributeNS(null, "transform", `scale(${use.n})`);
+					use.setAttributeNS(null, "fill", colors[n % colors.length]);
+					use.setAttributeNS(null, "x", -69);
+					use.setAttributeNS(null, "y", -69);
+					use.setAttributeNS(null, "width", 138);
+					use.setAttributeNS(null, "height", 138);
+
+					heartsRy.push(use);
+					heartsContainer.appendChild(use);
+				}
+
+				for (let n = 18; n >= 0; n--) {
+					useTheHeart(n);
+				}
+
+				heartsInitialized = true;
+			}
+
+			function startHeartAnimation() {
+				if (heartAnimationFrame) return; // Already running
+
+				initializeHearts();
+				const heartsContainer = document.getElementById("hearts");
+				if (!heartsContainer) return;
+
+				heartsContainer.style.opacity = "1";
+				document.body.classList.add("heart");
+
+				function Frame() {
+					heartAnimationFrame = window.requestAnimationFrame(Frame);
+					for (let i = 0; i < heartsRy.length; i++) {
+						if (heartsRy[i].n < 18) {
+							heartsRy[i].n += 0.01;
+						} else {
+							heartsRy[i].n = 0;
+							heartsRy[i].parentNode.appendChild(heartsRy[i]);
+						}
+						heartsRy[i].setAttributeNS(
+							null,
+							"transform",
+							`scale(${heartsRy[i].n})`
+						);
+					}
+				}
+				Frame();
+			}
+
+			function stopHeartAnimation() {
+				if (heartAnimationFrame) {
+					window.cancelAnimationFrame(heartAnimationFrame);
+					heartAnimationFrame = null;
+				}
+
+				const heartsContainer = document.getElementById("hearts");
+				if (heartsContainer) {
+					heartsContainer.style.opacity = "0";
+				}
+
+				document.body.classList.remove("heart");
 			}
 
 			function WeddingPage() {
@@ -600,6 +738,51 @@
 															setTimeout(() => {
 																triggerIconic();
 															}, 50);
+														} else if (
+															event.easter ===
+															"heart"
+														) {
+															// ← Added this entire block
+															// Handle heart animation
+															const heartsContainer =
+																document.getElementById(
+																	"hearts"
+																);
+															if (
+																heartsContainer &&
+																heartsContainer
+																	.style
+																	.opacity ===
+																	"1"
+															) {
+																stopHeartAnimation();
+															} else {
+																// Stop confetti first
+																const confettiWrapper =
+																	document.querySelector(
+																		".confetti-container"
+																	);
+																if (
+																	confettiWrapper
+																		.dataset
+																		.running ===
+																	"true"
+																) {
+																	confettiWrapper.innerHTML =
+																		"";
+																	confettiWrapper.dataset.running =
+																		"false";
+																}
+
+																// Clear other effects
+																document.body.className =
+																	"";
+																startHeartAnimation();
+															}
+
+															setTimeout(() => {
+																triggerIconic();
+															}, 10);
 														} else if (
 															event.easter
 														) {

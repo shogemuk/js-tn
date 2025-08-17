@@ -1014,6 +1014,113 @@ body.orangery .high-table {
 }
 /* END BODY ORANGERY */
 
+/* BODY HEARTS */
+.hearts-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+	pointer-events: none;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 4s ease;
+}
+
+#hearts {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	pointer-events: none;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+.heart .hearts-container {
+	opacity: 1;
+}
+
+body.heart,
+body.heart .hero-section .date,
+body.heart .search-box input,
+body.heart .btn-secondary,
+body.heart .scroll-to-top .btn {
+	font-family: "Quicksand", sans-serif;
+	font-style: normal;
+}
+
+body.heart .event-time,
+body.heart .event-title,
+body.heart .table-number {
+	font-family: "Poiret One", sans-serif;
+	font-weight: 700;
+}
+
+body.heart .section-title,
+body.heart .nav-link,
+body.heart .hall .table,
+body.heart .high-table {
+	font-family: "Lovers Quarrel", cursive;
+}
+body.heart .search-box input,
+body.heart .search-box input,
+body.heart .guest-name,
+body.heart .footer-info,
+body.heart .scroll-to-top .btn,
+body.heart .btn-secondary,
+body.heart .section-card,
+body.heart .table-card {
+	border-radius: 10px !important;
+}
+body.heart .section-title {
+	font-size: 4rem;
+}
+
+body.heart .event-item {
+	border: none;
+}
+body.heart .event-item:after {
+	content: "";
+	width: 2px;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: linear-gradient(to bottom, #073533, #50c878);
+
+	-webkit-mask-image: linear-gradient(
+		to bottom,
+		rgba(0, 0, 0, 1),
+		rgba(0, 0, 0, 0)
+	);
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-size: 100% 100%;
+	mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+	mask-repeat: no-repeat;
+	mask-size: 100% 100%;
+}
+body.heart .event-item::before {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	body.heart .section-title {
+		font-size: 3.5rem;
+	}
+}
+
+body.heart .nav-link {
+	font-size: 3.1rem;
+}
+
+body.heart .hall .table:before {
+	font-size: 1.5rem;
+}
+/* END BODY HEARTS */
+
 /* BODY STARLIGHT */
 .sparkle {
 	position: relative;
@@ -1214,7 +1321,7 @@ body.sparkle .event-item:before {
 	background: #2262b5;
 	box-shadow: 0 0 0 1px #2262b5;
 	border: 4px solid white;
-	top: 0;
+	top: 20px;
 	border-radius: 0;
 	transform: rotate(45deg);
 }
@@ -1491,11 +1598,82 @@ body.disco .disco-container span:nth-child(11) {
 	box-shadow: 38vmin 0 5.604231932959058vmin currentColor;
 }
 
+body.disco .high-table,
+body.disco .hall .table,
+body.disco .hall .table.selected,
+body.disco .scroll-to-top .btn,
+body.disco .btn-secondary {
+	background: linear-gradient(to right, #ff2d95, #2df4ff);
+	background-size: 400% 400%;
+	animation: shimmer 5s ease infinite;
+	border: none;
+}
+
+body.disco .nav-link {
+	color: #7b4a7f !important;
+}
+body.disco .nav-link.active {
+	color: #ecece7 !important;
+}
+
+body.disco .guest-name.highlight {
+	border-color: #7b4a7f;
+	background: #7b4a7f;
+}
+
+body.disco .table-card:hover,
+body.disco .table-card.highlight {
+	border-color: #7b4a7f;
+}
+
+body.disco .chair {
+	/* background: #ff2d95;
+	border-color: #2df4ff; */
+	border: none;
+	background: transparent;
+	transform-origin: center bottom;
+}
+
+body.disco .chair:nth-child(odd) {
+	animation: danceA 1.2s infinite ease-in-out;
+}
+body.disco .chair:nth-child(even) {
+	animation: danceB 1.2s infinite ease-in-out;
+}
+
+body.disco .chair:nth-child(odd)::before {
+	content: "💃";
+}
+
+body.disco .chair:nth-child(even)::before {
+	content: "🕺";
+}
+
+body.disco .chair::before {
+	position: absolute;
+	top: -10px;
+	left: -10px;
+}
+
+body.disco .chair.highlighted {
+	animation: dancePulse 1s infinite ease-in-out;
+	border-radius: 50%;
+	background: #c49a6c;
+}
+
+body.disco,
+body.disco .hero-section .date,
+body.disco .search-box input,
+body.disco .btn-secondary,
+body.disco .scroll-to-top .btn {
+	font-family: "Poiret One", sans-serif;
+	font-style: normal;
+}
+
 body.disco .event-time,
 body.disco .event-title,
 body.disco .table-number {
-	font-family: "Fontdiner Swanky", serif;
-
+	font-family: "Borel", cursive;
 	animation: discoColors 2s linear infinite,
 		discoFlicker 1s infinite alternate;
 }
@@ -1504,6 +1682,114 @@ body.disco .section-title,
 body.disco .nav-link,
 body.disco .hall .table,
 body.disco .high-table {
+	font-family: "Festive", cursive;
+}
+body.disco .high-table {
+	animation: discoColors 2s linear infinite;
+}
+body.disco .section-title {
+	color: #7b4a7f;
+}
+
+body.disco .event-item {
+	border: none;
+}
+
+body.disco .event-item::after {
+	content: "";
+	width: 2px;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+
+	/* Animated gradient background */
+	background: linear-gradient(
+		to bottom,
+		#ff2d95,
+		#2df4ff,
+		#ffe600,
+		#00ff85,
+		#ff2d95
+	);
+	background-size: 400% 400%;
+	animation: shimmer 5s ease infinite;
+
+	/* Optional fade-out mask */
+	-webkit-mask-image: linear-gradient(
+		to bottom,
+		rgba(0, 0, 0, 1),
+		rgba(0, 0, 0, 0)
+	);
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-size: 100% 100%;
+	mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+	mask-repeat: no-repeat;
+	mask-size: 100% 100%;
+}
+body.disco .event-item::before {
+	display: none;
+}
+@keyframes dancePulse {
+	0% {
+		transform: scale(1);
+		box-shadow: 0 0 0 0 rgba(196, 154, 108, 0.7);
+	}
+	25% {
+		transform: scale(1.1) rotate(-5deg);
+		box-shadow: 0 0 0 5px rgba(196, 154, 108, 0.4);
+	}
+	50% {
+		transform: scale(1.2) rotate(5deg);
+		box-shadow: 0 0 0 10px rgba(196, 154, 108, 0);
+	}
+	75% {
+		transform: scale(1.1) rotate(-5deg);
+		box-shadow: 0 0 0 5px rgba(196, 154, 108, 0.4);
+	}
+	100% {
+		transform: scale(1);
+		box-shadow: 0 0 0 0 rgba(196, 154, 108, 0.7);
+	}
+}
+@keyframes danceA {
+	0% {
+		transform: translateX(0) rotate(0deg) scale(1);
+	}
+	25% {
+		transform: translateX(-5px) rotate(-10deg) scale(1.05);
+	}
+	50% {
+		transform: translateY(-8px) rotate(0deg) scale(1.1);
+	}
+	75% {
+		transform: translateX(5px) rotate(10deg) scale(0.95);
+	}
+	100% {
+		transform: translateX(0) rotate(0deg) scale(1);
+	}
+}
+
+/* Animation B: Twist + hop */
+@keyframes danceB {
+	0% {
+		transform: translateY(0) rotate(0deg) scale(1);
+	}
+	20% {
+		transform: translateY(-6px) rotate(15deg) scale(1.1);
+	}
+	40% {
+		transform: translateY(0) rotate(-15deg) scale(0.95);
+	}
+	60% {
+		transform: translateY(-6px) rotate(10deg) scale(1.05);
+	}
+	80% {
+		transform: translateY(0) rotate(-10deg) scale(1);
+	}
+	100% {
+		transform: translateY(0) rotate(0deg) scale(1);
+	}
 }
 
 @keyframes discoColors {
