@@ -377,7 +377,7 @@
 				},
 				{
 					question: "If you need help,",
-					joke: "please disturb someone whose job today isn't 'Get Married.'",
+					joke: "Please disturb someone whose job today isn't 'Get Married.'",
 				},
 				{
 					question: "Directions or questions?",
@@ -644,10 +644,35 @@
 					}
 				}, [showModal]);
 				useEffect(() => {
+					const setNewJoke = () => {
+						const footerElement =
+							document.querySelector(".footer-joke");
+						if (footerElement) {
+							footerElement.classList.add("fade-out");
+
+							setTimeout(() => {
+								const randomIndex = Math.floor(
+									Math.random() * footerJokes.length
+								);
+								setRandomJoke(footerJokes[randomIndex]);
+								footerElement.classList.remove("fade-out");
+							}, 500);
+						} else {
+							const randomIndex = Math.floor(
+								Math.random() * footerJokes.length
+							);
+							setRandomJoke(footerJokes[randomIndex]);
+						}
+					};
+
 					const randomIndex = Math.floor(
 						Math.random() * footerJokes.length
 					);
 					setRandomJoke(footerJokes[randomIndex]);
+
+					const jokeInterval = setInterval(setNewJoke, 10000);
+
+					return () => clearInterval(jokeInterval);
 				}, []);
 				const handleSearch = (term) => {
 					setSearchTerm(term);
@@ -843,14 +868,16 @@
 							</div>
 
 							<div className="footer-info">
-								<p className="mb-2">
-									<strong>{randomJoke.question}</strong>
-								</p>
-								<p
-									className="mb-0"
-									style={{ color: "#6c757d" }}>
-									{randomJoke.joke}
-								</p>
+								<div className="footer-joke">
+									<p className="mb-2 ">
+										<strong>{randomJoke.question}</strong>
+									</p>
+									<p
+										className="mb-0"
+										style={{ color: "#6c757d" }}>
+										{randomJoke.joke}
+									</p>
+								</div>
 								<div className="text-center mt-3 scroll-to-top">
 									<button
 										className="btn btn-sm btn-outline-secondary"
