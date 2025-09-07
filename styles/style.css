@@ -481,6 +481,10 @@ strong {
 	transition: opacity 0.5s ease-in-out;
 }
 
+.footer-joke a {
+	color: #e0bb7f;
+}
+
 .footer-joke.fade-out {
 	opacity: 0;
 }
@@ -1026,6 +1030,10 @@ body.orangery .hall .table,
 body.orangery .high-table {
 	font-family: "Fleur De Leah", cursive;
 }
+
+.orangery .footer-joke a {
+	color: #ffa200;
+}
 /* END BODY ORANGERY */
 
 /* BODY HEARTS */
@@ -1132,6 +1140,7 @@ body.heart .nav-link {
 
 body.heart .hall .table:before {
 	font-size: 1.5rem;
+	line-height: 1.5rem;
 }
 /* END BODY HEARTS */
 
@@ -1408,6 +1417,11 @@ body.sparkle .scroll-to-top .btn,
 body.sparkle .btn-secondary {
 	border-radius: 0.5rem !important;
 }
+
+.sparkle .footer-joke a {
+	color: #2262b5;
+}
+
 /* Enhanced starfield animation with slight variations */
 @keyframes animStar {
 	from {
@@ -1747,6 +1761,10 @@ body.disco .event-item::after {
 body.disco .event-item::before {
 	display: none;
 }
+.disco .footer-joke a {
+	color: #ff2d95;
+}
+
 @keyframes dancePulse {
 	0% {
 		transform: scale(1);
@@ -1826,7 +1844,7 @@ body.disco .event-item::before {
 		color: #ff2d95;
 	}
 }
-/* END BODY DISCOI */
+/* END BODY DISCO */
 
 @keyframes shimmer {
 	0% {

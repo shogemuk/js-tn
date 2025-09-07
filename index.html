@@ -348,40 +348,44 @@
 			];
 			const footerJokes = [
 				{
-					question: "Need directions or have questions?",
-					joke: "Ask around — the bride and groom are busy starring in their own rom-com.",
+					question: "Wondering what gift to give?",
+					joke: `Skip the blender - <a href="https://www.paypal.com/paypalme/jideshoge" target="_blank">fund our adventure instead</a>!`,
 				},
 				{
-					question: "Directions or questions?",
-					joke: "Sure! Just don't ask the couple — they're on their honeymoon in their heads.",
+					question: "Thinking about a registry?",
+					joke: `We’re already registered at <a href="https://www.paypal.com/paypalme/jideshoge" target="_blank">Hotel & Airline</a>.`,
 				},
 				{
-					question: "Looking for help?",
-					joke: "Find someone who's not wearing a wedding dress or tux right now.",
+					question: "Want to help us celebrate?",
+					joke: `Turn our ‘I do’ into a tropical ‘woo-hoo’ with a <a href="https://www.paypal.com/paypalme/jideshoge" target="_blank">honeymoon boost</a>.`,
 				},
 				{
-					question: "Need directions or have questions?",
-					joke: "The bride and groom are currently offline.",
+					question: "Looking for something meaningful?",
+					joke: `Help us make memories, not clutter. <a href="https://www.paypal.com/paypalme/jideshoge" target="_blank">Click here to join in</a>.`,
 				},
 				{
-					question: "Lost? Confused?",
-					joke: "Ask anyone except the two people at the altar.",
+					question: "Need an excuse to give?",
+					joke: `Be the reason we upgrade from noodles at home to noodles in Italy 🍝 <a href="https://www.paypal.com/paypalme/jideshoge" target="_blank">Support here</a>.`,
 				},
 				{
-					question: "Directions or questions?",
-					joke: "Our customer service desk is literally anyone but the bride and groom.",
+					question: "Thinking cash feels impersonal?",
+					joke: `Not when it buys us piña coladas 🍹 <a href="https://www.paypal.com/paypalme/jideshoge" target="_blank">Cheers!</a>`,
 				},
 				{
-					question: "Need directions?",
-					joke: "Ask a groomsman. Questions? Ask a bridesmaid. The couple? Unavailable.",
+					question: "Prefer to shop for us?",
+					joke: `Our favorite store is called <a href="https://www.paypal.com/paypalme/jideshoge" target="_blank">The Honeymoon Fund</a>.`,
 				},
 				{
-					question: "If you need help,",
-					joke: "Please disturb someone whose job today isn't 'Get Married.'",
+					question: "Want to guarantee wedding photos with smiles?",
+					joke: `Help us avoid budget hotels - <a href="https://www.paypal.com/paypalme/jideshoge" target="_blank">you know what to do</a>.`,
 				},
 				{
-					question: "Directions or questions?",
-					joke: "The newlyweds are busy — try the friendly humans with clipboards.",
+					question: "Not sure how to wrap airfare?",
+					joke: `Don’t worry - just <a href="https://www.paypal.com/paypalme/jideshoge" target="_blank">click here</a> instead!`,
+				},
+				{
+					question: "Thinking practical?",
+					joke: `Trust us, memories last longer than salad tongs. <a href="https://www.paypal.com/paypalme/jideshoge" target="_blank">Give memories</a>.`,
 				},
 			];
 
@@ -874,9 +878,10 @@
 									</p>
 									<p
 										className="mb-0"
-										style={{ color: "#6c757d" }}>
-										{randomJoke.joke}
-									</p>
+										style={{ color: "#6c757d" }}
+										dangerouslySetInnerHTML={{
+											__html: randomJoke.joke,
+										}}></p>
 								</div>
 								<div className="text-center mt-3 scroll-to-top">
 									<button
